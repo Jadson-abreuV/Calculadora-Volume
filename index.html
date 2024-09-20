@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Volume Florestal</title>
+    <style>
+        /* Estilos principais */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #2e7d32;
+        }
+        input {
+            margin: 10px;
+            padding: 10px;
+            width: calc(100% - 24px);
+            max-width: 400px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .logos {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .logos img {
+            width: 100px;
+            margin: 10px;
+        }
+        @media (max-width: 600px) {
+            .logos img {
+                width: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Título -->
+    <h1>Calculadora de Volume em Florestas Nativas</h1>
+
+    <!-- Entradas de Diâmetro e Altura -->
+    <input type="number" id="diametro" placeholder="Digite o Diâmetro (D) em metros" step="any"><br>
+    <input type="number" id="altura" placeholder="Digite a Altura (H) em metros" step="any"><br>
+
+    <!-- Botão para Calcular Volume -->
+    <button onclick="calcularVolume()">Calcular Volume</button>
+
+    <!-- Exibição do Resultado -->
+    <div class="resultado" id="resultado"></div>
+
+    <!-- Logos de Instituições -->
+    <div class="logos">
+        <img src="grupo.png" alt="Logo da Universidade">
+        <img src="lab.png" alt="Logo da Empresa">
+    </div>
+
+    <!-- Script JavaScript para cálculo -->
+    <script>
+        function calcularVolume() {
+            // Obtendo os valores inseridos pelo usuário
+            const diametro = parseFloat(document.getElementById('diametro').value);
+            const altura = parseFloat(document.getElementById('altura').value);
+
+            // Verificando se os valores são válidos
+            if (isNaN(diametro) || isNaN(altura) || diametro <= 0 || altura <= 0) {
+                document.getElementById('resultado').innerHTML = "Por favor, insira valores válidos para Diâmetro e Altura.";
+                return;
+            }
+
+            // Calculando o volume: V = 1,3916313 * D^1,7842104 * H^0,7155028
+            const volume = 1.3916313 * Math.pow(diametro, 1.7842104) * Math.pow(altura, 0.7155028);
+
+            // Exibindo o resultado
+            document.getElementById('resultado').innerHTML = `O volume estimado é: ${volume.toFixed(2)} metros cúbicos.`;
+        }
+    </script>
+
+</body>
+</html>
