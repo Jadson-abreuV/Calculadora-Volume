@@ -3,99 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Volume Florestal</title>
+    <title>Calculadora de Volume de Florestas</title>
     <style>
-        /* Estilos principais */
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
+            margin: 0;
             padding: 20px;
-            background-color: #f4f4f4;
+            background-color: #f4f4f9;
         }
-        h1 {
-            color: #2e7d32;
+        h1, h2 {
+            color: #2c3e50;
         }
-        input {
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .images {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .images img {
+            max-width: 150px;
             margin: 10px;
+        }
+        input[type="number"] {
             padding: 10px;
-            width: calc(100% - 24px);
-            max-width: 400px;
-            border: 2px solid #ccc;
-            border-radius: 5px;
+            width: 100%;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
         button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #4CAF50;
+            padding: 10px 15px;
+            background-color: #3498db;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 4px;
             cursor: pointer;
         }
         button:hover {
-            background-color: #45a049;
+            background-color: #2980b9;
         }
-        .resultado {
+        .result {
             margin-top: 20px;
-            font-size: 18px;
             font-weight: bold;
+            color: #27ae60;
         }
-        .logos {
+        .equation {
+            background-color: #ecf0f1;
+            padding: 10px;
+            border-left: 5px solid #3498db;
+            margin-bottom: 20px;
+        }
+        .footer {
             margin-top: 30px;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .logos img {
-            width: 100px;
-            margin: 10px;
-        }
-        @media (max-width: 600px) {
-            .logos img {
-                width: 80px;
-            }
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <!-- Título -->
-    <h1>Calculadora de Volume em Florestas Nativas</h1>
-
-    <!-- Entradas de Diâmetro e Altura -->
-    <input type="number" id="diametro" placeholder="Digite o Diâmetro (D) em metros" step="any"><br>
-    <input type="number" id="altura" placeholder="Digite a Altura (H) em metros" step="any"><br>
-
-    <!-- Botão para Calcular Volume -->
-    <button onclick="calcularVolume()">Calcular Volume</button>
-
-    <!-- Exibição do Resultado -->
-    <div class="resultado" id="resultado"></div>
-
-    <!-- Logos de Instituições -->
-    <div class="logos">
-        <img src="grupo.png" alt="Logo da Universidade">
-        <img src="lab.png" alt="Logo da Empresa">
+    <div class="container">
+        <!-- Seção para carregar as imagens (logos) -->
+        <div class="images">
+            <img src="lab.png" alt="Logo do Laboratório">
+            <img src="grupo.png" alt="Logo do Grupo de Pesquisa">
+        </div>
+        
+        <h1>Calculadora de Volume para Florestas Nativas</h1>
+        
+        <h2>Estimativa de Volume</h2>
+        
+        <div class="equation">
+            <p>A equação utilizada para estimar o volume é:</p>
+            <p><strong>V = 1,3916313 * D<sup>1,7842104</sup> * H<sup>0,7155028</sup></strong></p>
+        </div>
+        
+        <form id="volumeForm">
+            <label for="diameter">Diâmetro (D) em cm:</label>
+            <input type="number" id="diameter" name="diameter" required placeholder="Ex: 30" step="any">
+            
+            <label for="height">Altura (H) em metros:</label>
+            <input type="number" id="height" name="height" required placeholder="Ex: 15" step="any">
+            
+            <button type="button" onclick="calcularVolume()">Calcular Volume</button>
+        </form>
+        
+        <div class="result" id="result"></div>
+        
+        <p>Para mais informações, consulte o artigo completo: 
+            <a href="https://rgsa.openaccesspublications.org/rgsa/article/view/4206" target="_blank">Acesse o Artigo</a>
+        </p>
     </div>
 
-    <!-- Script JavaScript para cálculo -->
+    <div class="footer">
+        <p>&copy; 2024 - Universidade do Estado do Amapá. Todos os direitos reservados.</p>
+    </div>
+
     <script>
         function calcularVolume() {
-            // Obtendo os valores inseridos pelo usuário
-            const diametro = parseFloat(document.getElementById('diametro').value);
-            const altura = parseFloat(document.getElementById('altura').value);
+            // Pegando os valores de D e H do formulário
+            const D = parseFloat(document.getElementById('diameter').value);
+            const H = parseFloat(document.getElementById('height').value);
 
-            // Verificando se os valores são válidos
-            if (isNaN(diametro) || isNaN(altura) || diametro <= 0 || altura <= 0) {
-                document.getElementById('resultado').innerHTML = "Por favor, insira valores válidos para Diâmetro e Altura.";
+            if (isNaN(D) || isNaN(H)) {
+                document.getElementById('result').innerText = "Por favor, insira valores válidos para D e H.";
                 return;
             }
 
-            // Calculando o volume: V = 1,3916313 * D^1,7842104 * H^0,7155028
-            const volume = 1.3916313 * Math.pow(diametro, 1.7842104) * Math.pow(altura, 0.7155028);
+            // Calculando o volume com a fórmula fornecida
+            const V = 1.3916313 * Math.pow(D, 1.7842104) * Math.pow(H, 0.7155028);
 
-            // Exibindo o resultado
-            document.getElementById('resultado').innerHTML = `O volume estimado é: ${volume.toFixed(2)} metros cúbicos.`;
+            // Exibindo o resultado arredondado a três casas decimais
+            document.getElementById('result').innerText = "Volume estimado: " + V.toFixed(3) + " m³";
         }
     </script>
 
