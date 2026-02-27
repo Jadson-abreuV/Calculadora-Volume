@@ -1,0 +1,28 @@
+Package: regressaoFacil
+Title: Ajuste e Avaliacao de Modelos de Regressao Linear e Nao Linear
+Version: 0.1.0
+Authors@R: c(
+    person(given = "Anderson Ribeiro",
+           family = "Torres",
+           role = c("aut", "cre"),
+           email = "andersontorres65259@gmail.com"),
+    person(given = "Jadson Coelho de",
+           family = "Abreu",
+           role = "aut",
+           email = "jadson.abreu@ueap.edu.br")
+)
+Description: Ferramentas para ajustar modelos de regressao linear
+    e nao linear, avaliar desempenho com metricas padrao e comparar
+    resultados. Inclui 31 modelos-base florestais para volume e
+    biomassa, modelo nao linear de Schumacher-Hall, R2 ajustado,
+    analise grafica de residuos e suporte a modelos customizados.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Imports:
+    stats
+Suggests:
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
